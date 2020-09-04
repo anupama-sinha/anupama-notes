@@ -8,12 +8,14 @@
 * But there can still be various scopes of logical errors and   missing out on handling exceptions and n-number of reasons always.
 
 ### History
-2002 — JUnit
-2006 — JUnit4
-2017 — JUnit5
+| Year | Version |
+| --- | --- |
+|2002 |JUnit |
+|2006 | JUnit4 |
+| 2017 | JUnit5 |
 
 ### Why JUnit5?
-1. More than 10 years old
+1. More than **10 years old**
 2. Latest features(Functional Programming-Lambda,etc) not supported
 3. Bugs & features got pilled up
 4. Older versions supported monolithic architecture
