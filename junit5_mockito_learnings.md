@@ -68,7 +68,7 @@ Dependency across Tests isn’t a good practice.
 * Create Class Instance(Object)
 * Requires change each time, class is changed. Not a good practice.
 
-```
+```java
 class SubtractOperationTest{
     @Test
     @Display("TestSubtractOperation")
@@ -93,7 +93,7 @@ class SubtractOperationTest{
      <scope>test</scope>
  </dependency>
 ```
-```
+```java
 @ExtendWith(MockitoExtension.class)
 class SubtractOperationMockTest{
     @InjectMocks
@@ -123,7 +123,7 @@ class SubtractOperationMockTest{
 * Used with MockBean for adding mocks for dependencies in Spring Application Context
 * Use MockMvc to mock different Request Mappings.
 
-```
+```java
 @WebMvcTest(ProductController.class)
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class ProductControllerTest{
@@ -153,7 +153,7 @@ class ProductControllerTest{
 * @MockitoExtension : Initializes mocking in only specific test. JUnit Jupiter equivalent of JUnit4 MockitoJUnitRunner. Here MockBean doesn’t work
 * @SpringExtension — Implements a lot more extensions than MockitoExtensions. Integrates the Spring TestContext Framework into JUnit 5’s Jupiter programming model. Hence, MockBean works with this.
 
-```
+```java
 @ExtendWith(MockitoExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class ProductServiceTest{
@@ -186,7 +186,7 @@ class ProductServiceTest{
 * Transactional & rolls back at end of @Test
 * Scans @Entity classes & configures Spring Data JPA Repository annotated with @Repository
 
-```
+```java
 @DataJpaTest
 class ProductRepositoryTest{
     @MockBean
@@ -215,7 +215,7 @@ class ProductRepositoryTest{
 * Also can override a class 
 * Only used for dependencies like @Mock. But not for SUT as @InjectMocks does
 
-```
+```java
 @ExtendWith(MockitoExtension.class)
 class SubtractOperationSpyTest{
     @InjectMocks
