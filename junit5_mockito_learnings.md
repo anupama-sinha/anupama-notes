@@ -65,8 +65,25 @@ Dependency across Tests isn’t a good practice.
 
 ### JUnit Evolution over the Years in Depth
 ## 1. Stubbing Classes
-. Create Class Instance(Object)
-. Requires change each time, class is changed. Not a good practice.
+* Create Class Instance(Object)
+* Requires change each time, class is changed. Not a good practice.
+
+```
+class SubtractOperationTest{
+    @Test
+    @Display("TestSubtractOperation")
+    void testSubtractOperation(){
+      SubtractOperation testClass = new SubtractOperation();
+      
+      //given
+      int expected = 7;
+      //when
+      int actual = testClass.subtract(14,7);
+      //then
+      assertEquals(expected,actual,"Subtract Operation Testing");
+    }
+}
+```
 
 ## 2. Mocking Classes
 ```xml
@@ -76,12 +93,58 @@ Dependency across Tests isn’t a good practice.
      <scope>test</scope>
  </dependency>
 ```
+```
+@ExtendWith(MockitoExtension.class)
+class SubtractOperationMockTest{
+    @InjectMocks
+    SubtractOperation testClass
+    
+    @Mock
+    CheckNumber mockCheckNumber;
+    
+    @Test
+    @Display("TestSubtractOperation")
+    void testSubtractOperation(){
+      //given
+      int expected = 7;
+      //when
+      when(mockCheckNumber.checkValidity()).andReturn(true);
+      int actual = testClass.subtract(14,7);
+      //then
+      assertEquals(expected,actual,"Subtract Operation Testing");
+    }
+ }
+ ```
+
 ## 3. Controller Testing with WebMvcTest annotation
 * Loads only controller components of application(Controller,RestController,JsonComponent)
 * Auto-configure Spring MVC, Jackson, Gson, Message converters, etc.
 * Configures MockMVC — Doesn’t need to start the application completely as in Integration Testing
 * Used with MockBean for adding mocks for dependencies in Spring Application Context
 * Use MockMvc to mock different Request Mappings.
+
+```
+@WebMvcTest(ProductController.class)
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
+class ProductControllerTest{
+    @Autowired
+    private MockMvc mockMvc;
+    
+    @MockBean
+    private ProductService mockProductService;
+    
+    @Test
+    @Display("TestGetProduct")
+    void testGetProduct(){
+      //given
+      RequestBuilder request = MockMvcRequestBuilders.get("/products");
+      //when
+      MvcResult result = mockMvc.perform(request).andExpect(status().isOk()).andReturn();
+      //then
+      assertEquals(200,result.getResponse().getContentAsString(),"Check Get Product");
+    }
+}
+```
 
 ## 4. Service Layer Testing
 * @InjectMocks : Creates objects and inject mocked dependencies. But tests actual object method.
@@ -90,15 +153,90 @@ Dependency across Tests isn’t a good practice.
 * @MockitoExtension : Initializes mocking in only specific test. JUnit Jupiter equivalent of JUnit4 MockitoJUnitRunner. Here MockBean doesn’t work
 * @SpringExtension — Implements a lot more extensions than MockitoExtensions. Integrates the Spring TestContext Framework into JUnit 5’s Jupiter programming model. Hence, MockBean works with this.
 
+```
+@ExtendWith(MockitoExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
+class ProductServiceTest{
+    @InjectMocks
+    private ProductService mockProductService;
+    
+    @Mock
+    private ProductRepository mockProductRepository;
+    
+    @Test
+    @Display("TestGetProduct")
+    void testGetProduct(){
+      //given
+      List<Product> products = new ArrayList<Products>(){
+        new Product(1,"Fruits");
+        new Product(2,"Vegetables");
+      };
+      //when
+      when(mockProductRepository.findAll()).thenReturn(products);
+      List<Product> resultProducts = mockProductService.getAllProducts();
+      //then
+      assertEquals(2,resultProducts.size(),"Check Count of Products");
+      verify(mockProductRepository).findAll();
+    }
+}
+```
+
 ## 5. Respository Layer Testing with DataJpaTest Annotation
 * Configures in-memory embedded database
 * Transactional & rolls back at end of @Test
 * Scans @Entity classes & configures Spring Data JPA Repository annotated with @Repository
 
+```
+@DataJpaTest
+class ProductRepositoryTest{
+    @MockBean
+    private ProductRepository mockProductRepository;
+    
+    @Test
+    @Display("TestGetProduct")
+    void testGetProduct(){
+      //given
+      List<Product> products = new ArrayList<Products>(){
+        new Product(1,"Fruits");
+        new Product(2,"Vegetables");
+      };
+      //when
+      when(mockProductRepository.findAll()).thenReturn(products);
+      List<Product> resultProducts = mockProductRepository.findAll();
+      //then
+      assertEquals(2,resultProducts.size(),"Check Count of Products");
+      verify(mockProductRepository).findAll();
+    }
+}
+```
+
 ## 6. Spying
 * Almost creates a class
 * Also can override a class 
 * Only used for dependencies like @Mock. But not for SUT as @InjectMocks does
+
+```
+@ExtendWith(MockitoExtension.class)
+class SubtractOperationSpyTest{
+    @InjectMocks
+    SubtractOperation testClass
+    
+    @Spy
+    CheckNumber spyCheckNumber;
+    
+    @Test
+    @Display("TestSubtractOperation")
+    void testSubtractOperation(){
+      //given
+      int expected = 7;
+      //when
+      when(spyCheckNumber.checkValidity()).andReturn(true);
+      int actual = testClass.subtract(14,7);
+      //then
+      assertEquals(expected,actual,"Subtract Operation Testing");
+    }
+ }
+ ```
 
 ### Miscellaneous Points
 1. @RunWith : Loads Spring Application Context and relevant beans. In JUnit5, all annotations have this by default. So not required.
@@ -113,3 +251,8 @@ Dependency across Tests isn’t a good practice.
 * Dependencies(Engine-powermock-api-mockito, API — powermock-module-junit4) 
 Integration Testing with SpringBootTest Annotation
 * Scans for SpringBootApplication annotation & loads entire application context from there.
+
+### Integration Testing with SpringBootTest Annotation
+* Scans for SpringBootApplication annotation & loads entire application context from there.
+
+Will come up with a detailed separate post on Powermock Framework & Integration Testing. Stay tuned in. :smiley: :pray:
