@@ -1,2 +1,0 @@
-# anupama-notes
-Learning Notes
