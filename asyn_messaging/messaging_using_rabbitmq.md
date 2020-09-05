@@ -49,7 +49,7 @@
 </dependency>
 ```
 
-* Spring Boot
+* RabbitMQ Dependency for AMQP
 
 ```xml
 <dependency>
