@@ -1,18 +1,28 @@
 # Messaging using RabbitMQ
 
-### Features
+### Definition
 * Open-source multi-protocol supported messaged broker
 * Written in Erlang language
 * Protocols supported : AMQP(Started from here), MQTT, and STOMP
 
+### Points to Note
+* Ready messages : Waiting to be consumed by Consumer
+* Load Balancing mechanism : Round robin Scheduling
+* Message types supported : String, JSON, XML, Serializable Object, etc.
+* Ways of Purging Messages
+	1. UI : Purge Message
+	2. CMD : rabbitmqctl.bat purge_queue <Queue-name>
+*There is no max Queue length but is configurable. Refer *[Queue Length Page]https://www.rabbitmq.com/maxlength.html
+
 ### Downloads & Setup
 
-* RabbitMQ : https://www.rabbitmq.com/install-windows-manual.html
-* ERLang OPT : https://www.erlang.org/downloads
+* *[RabbitMQ Download]https://www.rabbitmq.com/install-windows-manual.html
+* *[ERLang OPT]https://www.erlang.org/downloads
 * Set environment variables (ERLANG_HOME : C/PrgFiles/erlang/, Path(Append at end) : %ERLANG_HOME%\bin)
 * Enable RabbitMQ Management Plugin from CommandLine (rabbitmq_server-3.8.8\sbin>rabbitmq-plugins.bat enable rabbitmq_management)
 * Start the Server : Double click rabbitmq-server.bat(Takes some time to start server)
-* Visit the Localhost Installation of RabbitMQ at http://localhost:15672(Default Credentials : guest/guest)
+* Visit the Localhost Installation of RabbitMQ at http://localhost:15672
+(Default Credentials : guest/guest)
 
 ### Message Flow
 * Producer Application writes to Exchange
@@ -25,14 +35,6 @@
 2. Fanout - Exchange publishes to all bound queues(No Key requirement)
 3. Topic - queue.key=Partial key of Exchange.binding. Eg.(Exchange Keys - pen.pencil.eraser)=Queues(*.pen.*,*.pencil.*,#.eraser)[*-Exactly one word, #->Any number of words]
 4. Headers - Headers of Exchange = Header of Queue(any/all)
-
-### Points to Note
-* Ready messages : Waiting to be consumed by Consumer
-* Load Balancing mechanism : Round robin Scheduling
-* Message types supported : String, JSON, XML, Serializable Object, etc.
-* Ways of Purging Messages
-. [UI]  Purge Message
-. [CMD] rabbitmqctl.bat purge_queue <Queue-name>
 
 ### Dependencies
 
