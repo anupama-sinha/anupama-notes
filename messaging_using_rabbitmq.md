@@ -66,7 +66,7 @@ Famous Use Case : Pizza Shop
 ### Points to Note
 * Ready messages : Waiting to be consumed by Consumer
 * Load Balancing mechanism : Round robin Scheduling
-* Message types supported : String, JSON, XML, Serializable Object
+* Message types supported : String, JSON, XML, Serializable Object, etc.
 * Ways of Purging Messages
 . [UI]  Purge Message
 . [CMD] rabbitmqctl.bat purge_queue <Queue-name>
@@ -83,6 +83,14 @@ Famous Use Case : Pizza Shop
 </dependency>
 ```
 
+* Spring Boot
+
+```xml
+<dependency>
+	<groupId>org.springframework.amqp</groupId>
+	<artifactId>spring-rabbit</artifactId>
+</dependency>
+```
 ### Publishing Messages to Queue
 
 ```java
@@ -143,3 +151,47 @@ public class Consumer {
 	}
 }
 ```
+### Spring Boot Properties
+
+spring.rabbitmq.host=localhost
+spring.rabbitmq.port=5672
+
+### Publishing Serializable Custom Object to Queue from Controller
+
+```java
+@RestController
+@RequestMapping("/publish")
+public class RabbitMQPublishingController {
+	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
+	
+	@Autowired
+	Product product;
+	
+	@GetMapping("/product/{name}")
+	public String publishProduct(@PathVariable("name") String name) {
+		product.setProductName(name);
+		
+		//Simple Message Converter used here - Converts String,ByteArray & Serializable object only
+		rabbitTemplate.convertAndSend(<exchange-name>,<routing-key>, product);
+		
+		return "Message Sent Successfully";
+	}
+}
+```
+
+### Consuming Serializable Custom Object from Queue from Service Layer
+
+```java
+@Service
+public class RabbitMQConsumerService {
+
+	@RabbitListener(queues = "Pens")
+	public void getMessage(Product product) {
+		//Business Logic using Product Object
+	}
+}
+```
+
+Similarly, serialize the messages as per requirement and publish it. And then de-serialize at Consumer end accordingly. Will come up with a detailed separate post on Serialization concepts. That's it for now. Enjoy learning!! :pray:
