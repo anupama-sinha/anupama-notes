@@ -61,7 +61,7 @@
 
 ```java
 public class Publisher {
-	public static void main(String[] args) throws IOException, TimeoutException {
+	public static void main(String[] args) {
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
@@ -104,7 +104,7 @@ public class Publisher {
 
 ```java
 public class Consumer {
-	public static void main(String[] args) throws IOException, TimeoutException {
+	public static void main(String[] args) {
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
