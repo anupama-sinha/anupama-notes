@@ -18,7 +18,7 @@
 ### Downloads & Setup
 
 * [RabbitMQ Download](https://www.rabbitmq.com/install-windows-manual.html)
-* [ERLang OPT](https://www.erlang.org/downloads)
+* [ERLang OPT Download](https://www.erlang.org/downloads)
 * Set environment variables (ERLANG_HOME : C/PrgFiles/erlang/, Path(Append at end) : %ERLANG_HOME%\bin)
 * Enable RabbitMQ Management Plugin from CommandLine (rabbitmq_server-3.8.8\sbin>rabbitmq-plugins.bat enable rabbitmq_management)
 * Start the Server : Double click rabbitmq-server.bat(Takes some time to start server)
@@ -119,8 +119,8 @@ public class Consumer {
 ```
 ### Spring Boot Properties
 
-spring.rabbitmq.host=localhost
-spring.rabbitmq.port=5672
+* spring.rabbitmq.host=localhost
+* spring.rabbitmq.port=5672
 
 ### Publishing Serializable Custom Object to Queue from Controller
 
@@ -161,3 +161,7 @@ public class RabbitMQConsumerService {
 ```
 
 Similarly, serialize the messages as per requirement and publish it. And then de-serialize at Consumer end accordingly. Will come up with a detailed separate post on Serialization concepts. That's it for now. Enjoy learning!! :pray:
+
+### P.S.- Below are some good sites.
+* https://blog.theodo.com/2019/08/event-driven-architectures-rabbitmq/
+* https://medium.com/swlh/a-quick-guide-to-understanding-rabbitmq-amqp-ba25fdfe421d
