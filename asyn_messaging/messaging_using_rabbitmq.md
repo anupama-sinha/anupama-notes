@@ -16,7 +16,7 @@
 * Maximum message size is 512MiB from Version 3.8 onwards. Refer [Github Page](https://github.com/rabbitmq/rabbitmq-common/blob/master/include/rabbit.hrl#L250) for entire properties.
 
 ### Best Practices for RabbitMQ
-Refer [Linked Page](https://www.linkedin.com/pulse/13-rabbitmq-facts-i-wish-knew-from-start-gideon-arom) directly.
+Refer [LinkedIn Page](https://www.linkedin.com/pulse/13-rabbitmq-facts-i-wish-knew-from-start-gideon-arom) directly.
 
 ### Downloads & Setup
 
