@@ -12,12 +12,13 @@
 * Ways of Purging Messages
 	1. UI : Purge Message
 	2. CMD : rabbitmqctl.bat purge_queue <Queue-name>
-*There is no max Queue length but is configurable. Refer *[Queue Length Page]https://www.rabbitmq.com/maxlength.html
+* There is no max Queue length but is configurable. Refer *[Queue Length Page](https://www.rabbitmq.com/maxlength.html)
+* Maximum message size is 512MiB from Version 3.8. Refer *[Github Page](https://github.com/rabbitmq/rabbitmq-common/blob/master/include/rabbit.hrl#L250) for entire properties.
 
 ### Downloads & Setup
 
-* *[RabbitMQ Download]https://www.rabbitmq.com/install-windows-manual.html
-* *[ERLang OPT]https://www.erlang.org/downloads
+* *[RabbitMQ Download](https://www.rabbitmq.com/install-windows-manual.html)
+* *[ERLang OPT](https://www.erlang.org/downloads)
 * Set environment variables (ERLANG_HOME : C/PrgFiles/erlang/, Path(Append at end) : %ERLANG_HOME%\bin)
 * Enable RabbitMQ Management Plugin from CommandLine (rabbitmq_server-3.8.8\sbin>rabbitmq-plugins.bat enable rabbitmq_management)
 * Start the Server : Double click rabbitmq-server.bat(Takes some time to start server)
