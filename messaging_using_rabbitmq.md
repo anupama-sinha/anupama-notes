@@ -51,7 +51,7 @@ Famous Use Case : Pizza Shop
 * Start the Server : Double click rabbitmq-server.bat(Takes some time to start server)
 * Visit the Localhost Installation of RabbitMQ at http://localhost:15672(Default Credentials : guest/guest)
 
-### Message Flow in RabbitMQ
+### Message Flow
 * Producer Application writes to Exchange
 * Exchange has Conditions of Message Routing
 * Exchange routes messages to appropriate Queues
@@ -66,6 +66,7 @@ Famous Use Case : Pizza Shop
 ### Points to Note
 * Ready messages : Waiting to be consumed by Consumer
 * Load Balancing mechanism : Round robin Scheduling
+* Message types supported : String, JSON, XML, Serializable Object
 * Ways of Purging Messages
 . [UI]  Purge Message
 . [CMD] rabbitmqctl.bat purge_queue <Queue-name>
@@ -91,10 +92,35 @@ public class Publisher {
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 
-    //Message Body can be String,Array of String, JSON
-  	channel.basicPublish(<exchange-name>, <routing-key>, <basic-prop(Eg.Headers)>, <message-body>);
-		
-    channel.close();
+		// Default Exchange type is Direct
+		String exchangeType = "";
+
+		String message = "Hello Anupama!!!";
+
+		// channel.basicPublish(<exchange-name>, <routing-key>,<basic-prop(Eg.Headers)>, <message-body>)
+		switch (exchangeType) {
+		case "topic":
+			channel.basicPublish("Topic-Exchange", "pen.pencil.eraser", null, message.getBytes());
+			break;
+		case "fanout":
+			channel.basicPublish("Fanout-Exchange", "", null, message.getBytes());
+			break;
+		case "header":
+			Map<String, Object> headersMap = new HashMap<String, Object>();
+			headersMap.put("item1", "pen");
+			headersMap.put("item2", "pencil");
+			headersMap.put("item2", "eraser");
+
+			BasicProperties br = new BasicProperties();
+			br = br.builder().headers(headersMap).build();
+			channel.basicPublish("Headers-Exchange", "", br, message.getBytes());
+			break;
+		default:
+			channel.basicPublish("Direct-Exchange", "pen", null, message.getBytes());
+			break;
+
+		}
+		channel.close();
 		connection.close();
 	}
 }
@@ -112,7 +138,8 @@ public class Consumer {
 		DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 			String message = new String (delivery.getBody());
 		};
-		channel.basicConsume(<queue-name>, <autoAck-flag>, <deliverCallback> , <cancelCallback>);
+		//channel.basicConsume(<queue-name>, <autoAck-flag>, <deliverCallback> , <cancelCallback>)
+		channel.basicConsume("Queue-1", true, deliverCallback, consumerTag -> {});
 	}
 }
 ```
