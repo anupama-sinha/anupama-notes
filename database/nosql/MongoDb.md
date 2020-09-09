@@ -197,11 +197,81 @@ public class MongoTemplateController {
 }
 ```
 	
-### Query DSL(Work in Progress)
+### Query DSL
+* Open source Java Tool
+* Ensures type safety(Domain type & properties) with metadata classes. Even more than JPA 2.0(CritiriaQuery API) & Spring Data
+* Backend support for Hibernate Search(Started from this). And then moved on to support other(JPA,Spring Data(Follows Domain Driven Design) ,SQL,Collection,MongoDb,etc)
+* Secures query at all levels
+* Refactoring domain types is easier
+* Easier query definition addition
 
+### Query DSL Plugin for MongoDb
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-core</artifactId>
+        <version>{version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-apt</artifactId>
+        <version>{version}</version>
+    </dependency>    
+</dependencies>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.mysema.maven</groupId>
+            <artifactId>apt-maven-plugin</artifactId>
+            <version>{version}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>process</goal>
+                    </goals>
+                    <configuration>
+			<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+                        <processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor</processor>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+### QueryDSL Pojo
+* Metadata class(QDepartment.java) gets generated in target/generated-sources/java as specified in plugin.
+```java
+@QueryEntity
+@Document(collection="Department")
+public class Department {
+
+}
+```
+### QueryDSL Repository
+* Spring Data can be integrated and QueryDSL done by just extending QueryDslPredicateExecutor.
+* Predicate used for writing Queries
+```java
+@Repository
+public interface DepartmentRepository extends MongoRepository<Department, String>, QueryDslPredicateExecutor<Department> {
+	public Collection<Department> findDepartmentByName(){
+		QDepartment query = newQDepartment("query");
+		
+		BooleanExpression isStillValid = query.valid.isTrue();
+		BooleanExpression hasStudents = query.studentCount.isNotEmpty();
+		
+		Predicate predicate = qdept.deptName.endsWith("puter").and(isStillValid).and(hasStudents);
+		return findAll(predicate);
+	}
+}
+```	
 ### Data Migration using MongoBee(Work in Progress)
 
 ### References
 * https://docs.mongodb.com/guides/
 * https://docs.mongodb.com/manual/introduction/
 * https://youtu.be/EE8ZTQxa0AM
+* http://querydsl.com/
