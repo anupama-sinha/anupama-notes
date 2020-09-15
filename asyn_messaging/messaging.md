@@ -39,3 +39,6 @@ Famous Use Case : Pizza Shop
 * Streaming platform (Messaging + Distributed storage + Processing of data)
 * Pull-type messaging platform where consumers pull the messages from the broker
 * Straightforward routing approach that uses a routing key to send messages to a topic.
+
+6. **Event Hub**
+* Azure native messaging which helps in publishing events.
