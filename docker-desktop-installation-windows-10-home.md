@@ -1,3 +1,4 @@
+
 ## Docker Desktop Installations in Windows 10 Home Edition 64 bit OS
 
 ### Enabling BIOS Virtualization
@@ -23,6 +24,10 @@
 ### Hyper-V Configuration : Replace line 69 of DockerToolBox/start.sh
 "${DOCKER_MACHINE}" create -d virtualbox $PROXY_ENV "${VM}"
 "${DOCKER_MACHINE}" create -d virtualbox --virtualbox-no-vtx-check $PROXY_ENV "${VM}"
+
+### Issue of Docker Pull Timeout
+* https://stackoverflow.com/a/48049181/14179048
+* https://www.privateinternetaccess.com/blog/changing-your-dns-settings-on-windows-10/
 
 Then start Quickstart Terminal and start the game. :)
 
