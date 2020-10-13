@@ -36,9 +36,6 @@ import App from './App';
 * Only props sent and React elements are returned. 
 * Lifecycle hook methods cannot be used.
 ```java
-import React from 'react';  
-import ReactDOM from 'react-dom';  
-  
 function App() 
 { 
   return(
@@ -49,9 +46,6 @@ function App()
 * React Components are stateful as constructors can have states. 
 * Lifecycle hook methods can be used.
 ```java
-import React from 'react';  
-import ReactDOM from 'react-dom';  
-  
 export class App extends React.Component {
     render(){
          return(
