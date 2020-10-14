@@ -17,7 +17,7 @@
 ### Default vs Namespaced Import
 * Each React Component can have utmost one default export. WHile it can export in non-default way multiple components 
 * Namespaced Import
-```java
+```javascript
 //Source Class
 export class App extends React.Component
 //Importing Class
@@ -25,7 +25,7 @@ import { App } from './App';
 ``` 
 
 * Default Export
-```java
+```javascript
 //Source Class
 export default class App extends React.Component
 //Importing Class
@@ -35,7 +35,8 @@ import App from './App';
 * Function are stateless as constructor not allowed. 
 * Only props sent and React elements are returned. 
 * Lifecycle hook methods cannot be used.
-```java
+
+```javascript
 function App() 
 { 
   return(
@@ -45,7 +46,7 @@ function App()
 ```  
 * React Components are stateful as constructors can have states. 
 * Lifecycle hook methods can be used.
-```java
+```javascript
 export class App extends React.Component {
     render(){
          return(
@@ -71,3 +72,67 @@ export class App extends React.Component {
 ### Nodemon 
 * Automatically Refreshes code 
 * Used as devDependency as above
+
+### Arrow Function Components/Lambda Function Component
+* Introduced with ES6/ES2015(Year 2015)
+
+```javascript
+<button onClick={() => this.setState({count: this.state.count+1})}>Increase</button>
+```
+
+```javascript
+increase = () => {
+    this.setState({count : this.state.count +1})
+}
+
+<button onClick={this.increase}>Increase</button>
+```
+
+### Hooks in Functional Components 
+* Introduced in Oct 2018 with React 16.8 
+* Functions which help in hooking state and lifecycle in Functional components
+* Examples - useEffect,useState,useContext,useReducer,etc
+* Custom hooks can also be created
+
+#### useState Hook
+* Makes functional components stateful same as React Class Component 
+* No need to change function to components any more
+* Prefixed with name use as state variables declared at Function Component rendering. But when useState is used, it just return current value
+* Takes input as value(current state)
+* First array element is state variable name
+* Second array element is state handler methodname
+
+#### useEffect Hook 
+* Helps in handling lifecycle(componentDidMount,componentDidUpdate & componentWillUnmount in React classes, but unified into a single API)
+ 
+```javascript
+import React, { useEffect, useState } from 'react';
+
+export default function AppFunction() {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        console.log(`Count ::  ${count}`);
+        document.title=`Clicked ${count} times`;
+    })
+
+	  //Array Destructuring
+    // var countStateVariable = useState(0); // Returns a pair
+    // var count = countStateVariable[0]; // First item in a pair
+    // var setCount = countStateVariable[1]; // Second item in a pair
+
+    return (
+        <div>
+            <p>Hello Anupama</p>
+            <p>Let's Learn React.js now - AppFunction</p>
+            <button onClick={() => setCount(count + 1)}>Increase</button>
+            <p>Hi, My friend. U have increased the count : {count}</p>
+        </div>
+    );
+}
+```
+### Redux State Management
+* Coming up
+
+### Webpack
+* Coming up
