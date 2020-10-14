@@ -66,6 +66,8 @@ export class App extends React.Component {
 ### Babel
 * Transpiler which helps in transpiling newer future browser versions(ES2017,etc) to older browser version(ES5)
 * Its Not a compiler(Java -> Bytecode) as it converts one language to another
+* Used as devDependency since we don't need this in Production environment. Since webpack will help us in create bundle.js
 
 ### Nodemon 
 * Automatically Refreshes code 
+* Used as devDependency as above
