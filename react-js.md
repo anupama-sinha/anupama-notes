@@ -131,8 +131,104 @@ export default function AppFunction() {
     );
 }
 ```
-### Redux State Management
+### Reducers
+* Pure functions which gives same output for the same given input
+* Immutable state : Reducer creates a new state object for output. Input state remains as-is
+* Accepts state and action and returns the new state 
+> (state,action) => newState
+
+* Option 1 : Separate initial state
+```javascript
+  const count = 0;
+  const initialState = { count: 7 };
+  const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+* Option 2 : Initial State combined in reducer 
+```javascript
+  const [state, dispatch] = useReducer(reducer, { count: 7 });
+``` 
+
+* Option 3 : Lazy initialization of inital state
+```javascript
+  const initialCount=40;
+  const [state, dispatch] = useReducer(reducer, initialCount, init);
+
+function init(initialCount) {
+  return { count: initialCount };
+}
+```
+
+* Option 4 : Arrow Function
+```javascript
+  const initialCount = 40;
+  const [state, dispatch] = useReducer(countReducer, initialCount, init);
+```
+
+* Reducer
+```javascript
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'reset':
+      return init(action.payload);
+    default:
+      throw new Error();
+  }
+}
+
+* Arrow Function reducer
+```javascript
+const countReducer = (state, action) => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'reset':
+      return init(action.payload);
+    default:
+      throw new Error();
+  }
+}
+```
+
+* Invoking dispatch during element rendering
+```javascript
+    <button onClick={() => dispatch({ type: 'increment' })}>Increase</button><br /><br />
+    <button onClick={() => dispatch({ type: 'reset', payload: initialCount })}>Reset</button>
+    <p>Hi, My friend. U have increase the count : {state.count}</p>
+```
+
+### Need of useContext
+* React useReducer hook creates colocated state container for each functional component
+* useContext enables state containers created by useReducers and the dispatch function to be passed to any lower level component(Uni Directional flow of React)
+* If used at topmost level, state management can become "global".Thereby, props dont need to be passed to each component in the tree
+
+### useContext Working
+* React.createContext -> Returns the context
+* Value can be changed by top component(MyContext.Provider)
+* useContext only reads value
+
+```javascript
+const Mycontext = React.createContext("red");
+  const value = useContext(Mycontext);
+
+  useEffect(() => {
+    console.log(`Context is :: ${value}`);
+  })
+```
+
+### Redux State Mangement vs React State Management(useReducer+useContext hooks)
+* All component reducer can't be combined to single reducer concept as in Redux
+* One reducer provides one dispatch function which is then tightly coupled with one action in React State Management. While in Redux, global dispatch function can be used with any function across any reducer
+* Rich middleware ecosystem in Redux(Eg. Action logger)
+
+### Redux State Management Working
 * Coming up
 
 ### Webpack
 * Coming up
+
+### References
+* https://reactjs.org/tutorial/tutorial.html
+* https://www.robinwieruch.de/redux-vs-usereducer
