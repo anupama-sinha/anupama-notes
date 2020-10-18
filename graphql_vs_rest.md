@@ -85,6 +85,11 @@
 * Implementation of GraphQl  which transfers data between cloud(Server) to frontend app(Client)
 * Popular choice of using GraphQL in Javascript based apps
 
+### In memory Data Caching
+* Multiple data fetch for the same request can be effectively solved by use of [Facebook's DataLoader Library](https://www.graphql-tools.com/docs/connectors/)
+* [Implementation Steps](https://youtu.be/2cSVIWDUSn4)
+* [Migration from Solr to GraphQL](https://stackoverflow.com/questions/60326089/is-graphql-suitable-for-retrieving-multi-level-facet-data-from-a-back-end-withou)
+
 ### Conclusion
 * Meticulous analysis of application needs to be done to decide which one to go ahead with REST or GraphQL
 * Play around the GraphQL playgrounds available online and finalize which one to proceed with
