@@ -91,7 +91,7 @@
 
 ### References
 * https://graphql.org/code/
-* https://medium.com/@back4apps/graphql-vs-rest-62a3d6c2021d#:~:text=With%20REST%2C%20the%20server%20determines,has%20no%20automatic%20caching%20system.
+* [Differences between both](https://medium.com/@back4apps/graphql-vs-rest-62a3d6c2021d#:~:text=With%20REST%2C%20the%20server%20determines,has%20no%20automatic%20caching%20system.)
 * [Best Practices for GraphQL](https://youtu.be/1Fg_QtzI7SU)
 * [Access Control with GraphQL](https://www.apollographql.com/blog/authorization-in-graphql-452b1c402a9/)
 * [Access Control Implementation Example](https://www.pingidentity.com/en/company/blog/posts/2020/graphql-access-control-part-1.html)
