@@ -13,15 +13,15 @@
 
 ### Installation
 * Download [Maven](http://maven.apache.org/download.cgi) and set the environment variables as below
-M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9
-M2=$M2_HOME/bin
-MAVEN_OPTS=-Xms256m -Xmx512m
+* M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9
+* M2=$M2_HOME/bin
+* MAVEN_OPTS=-Xms256m -Xmx512m
 
 ### Maven Working
-* 1. Reads pom.xml(Describes project, manages dependencies & configures plugin for building software)
-* 2. Downloads dependencies from [central repo](https://search.maven.org/classic/#search|ga|1|centra) to local repository(C:\Users\anupama\.m2\repository)
-* 3. Executes lifecycles, build phases & goals
-* 4. Executes plugin
+1. Reads pom.xml(Describes project, manages dependencies & configures plugin for building software)
+2. Downloads dependencies from [central repo](https://search.maven.org/classic/#search|ga|1|centra) to local repository(C:\Users\anupama\.m2\repository)
+3. Executes lifecycles, build phases & goals
+4. Executes plugin
 (Executes acccording to selected build profile)
 
 ### Identifier Descriptions
@@ -35,6 +35,7 @@ MAVEN_OPTS=-Xms256m -Xmx512m
 * profiles : Describes the environment - dev,test,prod
 * build : Describes default maven goal, compiled project directory and application final name
 
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -90,7 +91,7 @@ MAVEN_OPTS=-Xms256m -Xmx512m
 
 ### Maven Settings File
 * Maven Installation Directory
-C:\Users\anupa\.m2\wrapper\dists\apache-maven-3.6.3-bin\apache-maven-3.6.3\conf\settings.xml
+> C:\Users\anupa\.m2\wrapper\dists\apache-maven-3.6.3-bin\apache-maven-3.6.3\conf\settings.xml
 
 
 ### Maven Build Lifecycle
