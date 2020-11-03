@@ -177,6 +177,7 @@ function reducer(state, action) {
       throw new Error();
   }
 }
+```
 
 * Arrow Function reducer
 ```javascript
@@ -193,7 +194,7 @@ const countReducer = (state, action) => {
 ```
 
 * Invoking dispatch during element rendering
-```javascript
+```html
     <button onClick={() => dispatch({ type: 'increment' })}>Increase</button><br /><br />
     <button onClick={() => dispatch({ type: 'reset', payload: initialCount })}>Reset</button>
     <p>Hi, My friend. U have increase the count : {state.count}</p>
@@ -223,12 +224,187 @@ const Mycontext = React.createContext("red");
 * One reducer provides one dispatch function which is then tightly coupled with one action in React State Management. While in Redux, global dispatch function can be used with any function across any reducer
 * Rich middleware ecosystem in Redux(Eg. Action logger)
 
+### Redux
+* Library for managing global application state
+* Uses uni-direction data flow from parent to child component
+* Store : Storage for common data
+* Actions : Simple JS Object(Key-Value) and has type. Helps in sending data to Redux Store
+* Dispatch : Redux API to invoke actions
+* Reducers :   JS Function accepting oldState and action. Performs the logic(frontend or business) when action is formed
+* Component -> Creates action -> Dispatch Action -> Store -> Use reducer to create newState -> Store updates component with newState
+
+### Best Practices for Redux Statment Management
+* Side effect operations not allowed in reducer function(Eg. Fetching data using API)
+* Better to have separate reducers based on functionalities and use combineReducers API to merge to one as Redux accepts one reducer only
+
 ### Redux State Management Working
-* Coming up
+
+index.js
+```javascript
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import CountReducers from './reducers/CountReducers';
+
+const store = createStore(CountReducers)
+ReactDOM.render(
+  <Provider store={store}> {/* Required for redux store */}
+    <React.StrictMode>
+      <ReduxApp>
+    <React.StrictMode>
+  <Provider>    
+```
+
+CountReducer.js
+```javascript
+const initialState = {
+    count: 0
+}
+
+export default function CountReducers (state=initialState, action){
+    switch (action.type) {
+        case 'INCREASE':
+            return {
+                ...state,
+                count: action.payload + 1
+            }
+        default:
+            return state
+    }
+}
+```
+
+CountAction.js
+```javascript
+export const incrementAction = (count) => {
+  return {
+    type: 'INCREASE',
+    payload: count
+  }
+}
+```
+
+ReduxApp.js
+```javascript
+class ReduxApp extends Component {
+    constructor(props) {
+        super(props);
+    }
+    handleIncrementAction = () => {
+        const {incrementAction,count} = this.props
+        incrementAction(count)
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.handleIncrementAction}>Increase</button>
+            </div>
+        );
+    }
+
+    function mapStateToProps(state){
+    return{
+        count: state.count
+    }
+}
+
+const mapDispatchToProps={
+    incrementAction:incrementAction,
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ReduxApp);
+```
+
+### Redux Middleware Concepts
+* Middleware is the block of code which acts as a mediator while receiving or generating response
+* There are 2 popular ones - Thunk & Saga(The latest one)
+
+### Redux Thunk
+* Thunk is a function wrapper to delay the evalutation using async-wait
+* Allows to write action creators returning functions instead of typical action object
+
+### Redux Thunk Working
+* In progress
+
+### Redux Saga
+* State management library to make application side effects(Eg. Asynchronous Actions such as fetching data) easier to execute and handle
+* Uses functions of generator for dispatching and listenening to actions
+* Complex logic function expressed as pure functions(Sagas). Pure functions are predictable and repeatable
+
+### Redux Saga Working
+
+index.js
+```javascript
+import { store } from './stores/store'
+import ReduxSagaApp from './components/ReduxSagaApp'
+
+ReactDOM.render(
+  <Provider store={store}>
+    <React.StrictMode>
+      <ReduxSagaApp>
+    <React.StrictMode>
+  <Provider> 
+```
+
+store.js
+```javascript
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import CountReducers from '../reducers/CountReducers';
+import { watchCountIncrease } from '../sagas/saga'
+
+const sagaMiddleware = createSagaMiddleware();
+
+export const store = createStore(CountReducers, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(watchCountIncrease);
+```
+
+CountAction.js
+```javascript
+export const incrementActionAsyncSaga  = (countSaga) => {
+  return {
+    type: 'INCREASE_ASYNC_WATCH',
+    payload: countSaga
+  }
+}
+```
+
+CountReducer.js
+```javascript
+case 'INCREASE_ASYNC_WATCH':
+            console.log("Action.payload",action)
+            return {
+                ...state,
+                countSaga: action.payload + 1
+            }
+```
+
+ReduxSagaApp.js
+```javascript
+<button onClick={this.props.onCountIncrease}>IncreaseAsync</button>
+
+function mapStateToProps(state) {
+    return {
+        countSaga: state.countSaga
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onCountIncrease: (countSaga) => dispatch({ type: 'INCREASE_ASYNC_WATCH', payload: countSaga})
+    };
+};
+
+```
 
 ### Webpack
 * Coming up
 
+Please refer my Github learning code [here](https://github.com/anupama-sinha/reactjs-redux-project)
+
 ### References
 * https://reactjs.org/tutorial/tutorial.html
 * https://www.robinwieruch.de/redux-vs-usereducer
+* https://medium.com/@lavitr01051977/make-your-first-call-to-api-using-redux-saga-15aa995df5b6
+* https://redux-saga.js.org/docs/introduction/BeginnerTutorial.html
