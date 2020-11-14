@@ -9,6 +9,15 @@
 * Helps in downloading Dependencies from 3rd Party Repositories and integrate in our project.
 * All versions and name details can be searched from [NPM Page](https://www.npmjs.com/)
 
+### Browser Components
+* User interface : Relevant IP Address searched for DNS name(Eg. wwww.google.com) to get the resource(HTML,CSS, Javascript, Images, etc) 
+* Browser engine : Takes commands and informs rendering engine to perform action(Eg. Refresh F5)
+* Rendering engine : Parses unconventionally/context free grammar(HTML) & conventionally/context sensitive(CSS & Javascript) -> Render Tree -> Layout creation(Calculates position & size) -> Rendered on webpage
+* Networking : Resources are handled
+* Javascipt Interpreter : Handles Javascript
+* UI Backend : Backend for UI
+* Data Persistence : Eg. Cookies, LocalStorage
+
 ### DOM vs Virtual DOM
 * DOM(Document Object Model): Tree like structure of HTML elements present in webpage. The entire DOM used to be rendered in ancient webpage design
 * Virtual DOM: Lightweight copy of the DOM which tracks any change to JSX element and renders only change
@@ -68,10 +77,18 @@ export class App extends React.Component {
 * Transpiler which helps in transpiling newer future browser versions(ES2017,etc) to older browser version(ES5)
 * Its Not a compiler(Java -> Bytecode) as it converts one language to another
 * Used as devDependency since we don't need this in Production environment. Since webpack will help us in create bundle.js
+* Try your hands at [Babel TryOut](https://babeljs.io/) and write latest Javascript version codes and see how it's converted to brower-compatible Javascript
+* Babel 7(const arr = [4,5,56]) & es2015(var arr = [4, 5, 56];)
+
 
 ### Nodemon 
 * Automatically Refreshes code 
 * Used as devDependency as above
+
+
+### Webpack
+* Bundles all files together(bundle.js,bundle.css)
+
 
 ### Arrow Function Components/Lambda Function Component
 * Introduced with ES6/ES2015(Year 2015)
@@ -398,13 +415,46 @@ const mapDispatchToProps = dispatch => {
 
 ```
 
-### Webpack
-* Coming up
+### Invoking API Endpoints using asynchronous AJAX request
+* AJAX(Asynchronous JavaScript And XML) : Uses XMLHttpRequest object to communicate with servers
+* Supports all file formats(JSON,XML,HTML & Text files)
+* fetch() : Takes mandatory arg and returns response as promise
+* Promise : Object stating eventual completion(fulfilled,rejected & pending)
 
-Please refer my Github learning code [here](https://github.com/anupama-sinha/reactjs-redux-project)
+```javascript
+componentDidMount(){
+        fetch('https://restcountries.eu/rest/v2/capital/delhi')
+        .then(response => response.json())
+        .then(responseJSON => {
+            this.setState({
+                items: responseJSON
+                });
+            })
+        .catch(error => {
+            console.log("Fetch errored out",error)
+        });
+    }
+```
+
+### Invoking API Endpoints using Axios
+* Axios : Promise(async & await) based HTTP client
+* Used for larger applications
+* Request and response interception
+* Streamlined error handling
+* Protection against XSRF
+* Support for upload progress
+* Response timeout
+* Ability to cancel requests
+* Support for older browsers
+* Automatic JSON data transformation
+* https://www.smashingmagazine.com/2020/06/rest-api-react-fetch-axios/
+
+Please refer my Github learning code [here](https://github.com/anupama-sinha/reactjs-redux-project) for complete details
 
 ### References
 * https://reactjs.org/tutorial/tutorial.html
 * https://www.robinwieruch.de/redux-vs-usereducer
 * https://medium.com/@lavitr01051977/make-your-first-call-to-api-using-redux-saga-15aa995df5b6
 * https://redux-saga.js.org/docs/introduction/BeginnerTutorial.html
+* [Babel](https://youtu.be/yLrNwo4wXOs) 
+* [Webpack](https://youtu.be/lFjinlwpcHY)

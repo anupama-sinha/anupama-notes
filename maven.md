@@ -1,6 +1,5 @@
 ### Maven
-* Powerful build tool
-* Built in Java
+* Powerful build tool built in Java
 * Automates software build tool
 * Efficient transitive dependency management
 

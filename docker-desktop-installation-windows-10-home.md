@@ -1,4 +1,3 @@
-
 ## Docker Desktop Installations in Windows 10 Home Edition 64 bit OS
 
 ### Enabling BIOS Virtualization
