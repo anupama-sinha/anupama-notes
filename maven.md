@@ -1,19 +1,20 @@
 ### Maven
-* Powerful build tool built in Java
+* Powerful build tool built in Java 
 * Automates software build tool
 * Efficient transitive dependency management
+* Builds, Publishes & deploys projects at once
 
 ### Need for Maven
 * Difficult old Tasks(Downloading dependencies, adding further jars in classpath)
 
 ### Maven vs Ant
-* Maven uses declarative approach(What to build & not how to built)
+* Maven uses declarative approach(What to build & not how to build)
 * Ant uses imperative approach(What to build & how to build)
 
 ### Installation
 * Download [Maven](http://maven.apache.org/download.cgi) and set the environment variables as below
 * M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9
-* M2=$M2_HOME/bin
+* M2=$M2_HOME/bin : Helps in accessing CMD line of Maven
 * MAVEN_OPTS=-Xms256m -Xmx512m
 
 ### Maven Working
@@ -22,6 +23,13 @@
 3. Executes lifecycles, build phases & goals
 4. Executes plugin
 (Executes acccording to selected build profile)
+
+### Maven Repository
+* Directories of packaged JAR files that contain metadata(POM) based on which dependencies are downloaded
+* Types
+    1. Local : Local PC
+    2. Remote : Any server
+    3. Central : Internet(Maven Community)
 
 ### Identifier Descriptions
 * modelVersion : Version of the pom model matching with maven version
@@ -92,8 +100,7 @@
 * Maven Installation Directory
 > C:\Users\anupa\.m2\wrapper\dists\apache-maven-3.6.3-bin\apache-maven-3.6.3\conf\settings.xml
 
-
-### Maven Build Lifecycle
+### Maven Build Lifecycle : Sequence of build phases which in turn has sequence of goals
 * validate: validate the project is correct and all necessary information is available
 * compile: compile the source code of the project
 * test: test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
@@ -104,6 +111,23 @@
 * deploy: done in an integration or release environment, copies the final package to the remote repository for sharing with other developers and projects.
 * clean: cleans up artifacts created by prior builds
 * site: generates site documentation for this project
+
+### Build Profiles
+* Configurational values required to build project using different configurations for corresponding builds for different environments
+
+### Build Plugins
+* Group of goals which may or may not be of same phase
+* Performs specific goals
+
+### Maven Architecture
+* Maven -> Reads pom.xml -> Connects with Maven Repository -> Does the task
+
+### Build Phases
+* Compile -> Test-Compile -> Test -> Package -> Integration-test -> Verify -> Install -> Deploy
+
+### Commands
+> mvn --version
+> mvn archetype:generate  
 
 ### Building JARs
 * In progress

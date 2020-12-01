@@ -16,12 +16,29 @@
 * Networking : Resources are handled
 * Javascipt Interpreter : Handles Javascript
 * UI Backend : Backend for UI
-* Data Persistence : Eg. Cookies, LocalStorage
+* Data Persistence : Eg. Cookies, LocalStorage, Session Storage
+
+### History
+* AngularJS : Started in 2010, Mainly for Google Adwords
+* React.JS : Facebook built this library in 2012, mainly for Facebook Advertisement Adwords
+* Angular 2: 2016, Not backward compatible with Angular JS
+* 2018 Onwards, Since React.js versions started becoming more common than Angular framework
 
 ### DOM vs Virtual DOM
 * DOM(Document Object Model): Tree like structure of HTML elements present in webpage. The entire DOM used to be rendered in ancient webpage design
 * Virtual DOM: Lightweight copy of the DOM which tracks any change to JSX element and renders only change
 * Virtual DOM is quite faster than entire DOM rendering
+
+### react & react-dom
+* Earlier both were clubbed in react
+* With introduction of react native(Mobile Application Framweork), react-dom was not required for mobile. But only for web apps, So it was segregated to react & react-dom based on package size
+
+### Babel
+* Transpiler which helps in transpiling newer future browser versions(ES2017,etc) to older browser version(ES5)
+* Its Not a compiler(Java -> Bytecode) as it converts one language to another
+* Used as devDependency since we don't need this in Production environment. Since webpack will help us in create bundle.js
+* Try your hands at [Babel TryOut](https://babeljs.io/) and write latest Javascript version codes and see how it's converted to brower-compatible Javascript
+* Babel 7(const arr = [4,5,56]) & es2015(var arr = [4, 5, 56];)
 
 ### Default vs Namespaced Import
 * Each React Component can have utmost one default export. WHile it can export in non-default way multiple components 
@@ -69,26 +86,19 @@ export class App extends React.Component {
 
 ### LifeCycle Hooks
 * Lifecycle methods can be leveraged for invoking business logics before or after rendering,mounting or updating
+* First time mount : Constructor,Render, componentDidMount
+* Any update : shouldComponentUpdate,Render,componentDidUpdate
 
 ### Ecmascipt(ES6/ES7)
 * JSX Uses Ecmascript standard of Coding
-
-### Babel
-* Transpiler which helps in transpiling newer future browser versions(ES2017,etc) to older browser version(ES5)
-* Its Not a compiler(Java -> Bytecode) as it converts one language to another
-* Used as devDependency since we don't need this in Production environment. Since webpack will help us in create bundle.js
-* Try your hands at [Babel TryOut](https://babeljs.io/) and write latest Javascript version codes and see how it's converted to brower-compatible Javascript
-* Babel 7(const arr = [4,5,56]) & es2015(var arr = [4, 5, 56];)
-
+* Ecma Community sets a standard for rendering Javascript in different browers(Chrome,Microsoft Edge,etc)
 
 ### Nodemon 
 * Automatically Refreshes code 
 * Used as devDependency as above
 
-
 ### Webpack
 * Bundles all files together(bundle.js,bundle.css)
-
 
 ### Arrow Function Components/Lambda Function Component
 * Introduced with ES6/ES2015(Year 2015)
@@ -110,6 +120,7 @@ increase = () => {
 * Functions which help in hooking state and lifecycle in Functional components
 * Examples - useEffect,useState,useContext,useReducer,etc
 * Custom hooks can also be created
+* Reduced Wrapper Hell issues
 
 #### useState Hook
 * Makes functional components stateful same as React Class Component 
