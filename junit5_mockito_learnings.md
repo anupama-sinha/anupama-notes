@@ -308,3 +308,4 @@ Will come up with a detailed separate post on Powermock Framework & Integration 
 * [Famous Martin Fowler Material on Mocks & Stubs](https://martinfowler.com/articles/mocksArentStubs.html)
 * [xUnit Design Pattern of Testing](http://xunitpatterns.com/)
 * [Jacoco-Java Code Coverage](https://www.eclemma.org/jacoco/trunk/doc/maven.html)
+* [Jacoco, Surefire, Failsafe Concepts](https://ccbill.com/blog/code-coverage-with-surefire-and-jacoco)
