@@ -30,6 +30,12 @@
 
 Then start Quickstart Terminal and start the game. :)
 
+### Docker Desktop Installation for Windows Pro/Ultimate
+* Just Docker Desktop to be installed
+* Enter into BIOS during system boot and enable Virtualization 
+* If docker-user group not added, Add it from Computer Management > System Tools > Local Users and Group(lusrmgr)
+* Even, virtualization can be edited from Computer Management without entering into BIOS
+
 ### References
 * https://www.youtube.com/watch?v=YH3sutAsxEM
 * https://medium.com/@mbyfieldcameron/docker-on-windows-10-home-edition-c186c538dff3
