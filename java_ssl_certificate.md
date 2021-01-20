@@ -1,7 +1,7 @@
 ## Need
 * Client must trust server for successful SSL connection
 * Default Certificate(TrustStore) is cacerts(C/ProgramFiles/Java/JDK/jre/lib/security). This keeps a Keystore of Certificate Authorities(CA) which issue certificates like Verisign,GoDaddy, etc
-* If we need to add another new CA for a new Server, either we can append in cacerts or we can create another new one with name as jssecacerts and copy it under JDK Security folder
+* If we need to add another new CA for a new Server, either we can append in cacerts or we can create another new one with name as jssecacerts and copy it under JDK Security folder. jssecacerts takes precedence over cacerts
 
 ## Exceptions Raised for missing CA addition
 > ValidatorException : PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException : unable to find valid ceritification path to requirested target
