@@ -36,6 +36,9 @@ Then start Quickstart Terminal and start the game. :)
 * If docker-user group not added, Add it from Computer Management > System Tools > Local Users and Group(lusrmgr)
 * Even, virtualization can be edited from Computer Management without entering into BIOS
 
+### Docker Installation on Ubuntu
+* Please check [my Ubuntu installation guide](https://github.com/anupama-sinha/anupama-notes/blob/master/ubuntu_first_time_installations.md) for the same
+
 Please check [my sample Docker project](https://github.com/anupama-sinha/spring-mysql-docker-application)
 
 ### References
