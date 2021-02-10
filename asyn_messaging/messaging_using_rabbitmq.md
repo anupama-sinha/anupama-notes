@@ -29,7 +29,10 @@ Refer below links for the same.
 * Start the Server : Double click rabbitmq-server.bat(Takes some time to start server)
 * Visit the Localhost Installation of RabbitMQ at http://localhost:15672
 (Default Credentials : guest/guest)
+* Enable RabbitMQ for JMS Topic Exchange
+> rabbitmq-plugins enable rabbitmq_jms_topic_exchange
 
+> rabittmq-plugins list
 ### Message Flow
 * Producer Application writes to Exchange
 * Exchange has Conditions of Message Routing
