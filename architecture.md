@@ -35,3 +35,6 @@
 * Virtual DOM in React.js
 * Change Detection Rendering Concept for entire DOM in Angular
 * Better routing
+
+## Sample Architecture Diagram
+![Architecture](https://user-images.githubusercontent.com/68496768/107845275-56306680-6e00-11eb-87d8-d6cc96a40d68.png)
