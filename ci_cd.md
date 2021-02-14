@@ -38,13 +38,13 @@
 * Step starts as soon as Docker Image published to Pipeline. It picks Docker Image and publishes to AKS
 * Create artifact in Pipeline Release job : Provide project name, source build pipeline for latest version
 * Create stage for Environment Deployment
+* Then it is saved & queued
+* Once job run succeeds, Docker Image is deployed in AKS
 
-
-
-* Then it is saved
-* Once queued, it starts agent job where a new OS instance(Eg. Ubuntu) given for each agent job run
-* Once job run succeeds, feature branch gets merged to develop branch
-* Post develop merge, CI/CD Build initiates
-* Eg. Pipeline Creation(CI for PR Build)
-
-
+## CI for Common Library
+* Source & destination branches chosen for project
+* Maven Authenticate for choosing Azure feed
+* GIT Config : Mentions GIT Username , email and checks out specific branch(Eg. main)
+* MAven : Building JAR using goal package
+* CLI to Publish JAR(ran in backfround to avoid locks) to Artifact Feed using below command and Personal Access Token(Generated for Azure)
+> mvn -B release:clean release:prepare release:perform -DreleaseVersion=1.0 -DdevelopmentVersion=1.0.1-SNAPSHOT -Dusername=<MY-USERNAME> -Dpassword=<MY-PAT>
