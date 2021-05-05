@@ -137,6 +137,7 @@ set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_261\jre
 ### Commands
 > mvn --version
 > mvn archetype:generate  
+> mvn dependency:tree
 
 ### Building JARs
 * In progress
