@@ -16,6 +16,15 @@
 * M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9
 * M2=$M2_HOME/bin : Helps in accessing CMD line of Maven
 * MAVEN_OPTS=-Xms256m -Xmx512m
+* Path=%M2%
+
+### JDK Mapping for Multi JDK environment(Optional)
+In mvn.cmd file, please make below changes
+@REM===START VALIDATION
+set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_261\jre
+
+### Maven Wrapper for MVN Version(Optional)
+> mvn -N io.takari:maven:wrapper -Dmaven=3.3.3
 
 ### Maven Working
 1. Reads pom.xml(Describes project, manages dependencies & configures plugin for building software)
@@ -131,6 +140,10 @@
 
 ### Building JARs
 * In progress
+
+### Maven Templates
+* There are various templates which can be used for maven. Most common one is org.apache.maven.archetypes : maven-archetype-quickstart
+* Similarly, for other languages, different ones can be used. It minimizes boiler plate coding
 
 ### References
 * https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
