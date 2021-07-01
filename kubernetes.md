@@ -1,6 +1,8 @@
 ## Kubernetes/K8s Architecture
 * Helps in Container Orchestration technology
 
+![k8s](https://user-images.githubusercontent.com/68496768/124140154-df8dc000-daa5-11eb-98e6-f3909ce40adc.png)
+
 ### Containers
 * Dockers can be used for creating Containers.
 * Check [My Github Notes on Docker](https://github.com/anupama-sinha/anupama-notes/blob/master/docker.md)
