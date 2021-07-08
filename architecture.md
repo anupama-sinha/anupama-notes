@@ -38,3 +38,14 @@
 
 ## Sample Architecture Diagram
 ![Architecture](https://user-images.githubusercontent.com/68496768/107845275-56306680-6e00-11eb-87d8-d6cc96a40d68.png)
+
+## Highly Scalable Microservices Architecture Components & Alternatives
+* Containers : Docker/CoreOS/LXC Linux Container/OpenVZ(OpenSource Single Linux)/ContainerD
+* Orchestration Engines(Kubernetes/Docker Swarm/Openhift/Cloud Foundry Diego/CoreOS Fleet/Mesosphere Marathon/Amazon ECS,AKS)
+* Service Discovery : Consul/Apache Zookeeper/Etcd/Eureka Netflix(AWS)/SmartStack/SkyDNS(On top of etcs)/Vyne/Baker Street
+* API Gateway : Kong-open source of Nginx/Ambassador/Ocelot/Tyk/EC2/Azure APIM/Spring Cloud gateway/KrakenD
+* Event Bus Tools & Technology : Apache Kafka/RabbitMQ/Azure Service Bus, Amazon Simple Queue Service/Google Cloud Pub-Sub)
+* Logging : Fluent-Ruby/ELK/EFK/Graylog/Bunyan/Suro
+* Monitoring : Grafana-Graph/Prometheus/cAdvisor/Riemann/Spigo/Sensu/Sysgid monitoring(Distributed/Full Stack)
+* Documentation : Swagger UI/Aplary/Readme.io/Slate Ruby based/Gelato/Aglio static HTML/LucyBot's Static Website Generator
+* Testing Tool : POSTMAN/Hoverfly(Go, Native support for Java/Pact/Gatling DevOps/RestAssured(HTTP Based)/Citrus Framework
