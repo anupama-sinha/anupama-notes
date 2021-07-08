@@ -139,6 +139,23 @@ set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_261\jre
 > mvn archetype:generate  
 > mvn dependency:tree
 
+### Maven Release(mvn release)
+* release:clean -> Performs clean up after release preparation
+* release:prepare -> Prepares release in SCM. Phases to ensure POM ready for release & creates a tag in SVN which can be sued by release:perform to make a release
+
+```
+<scm>
+	<developerConnection>scm:svn:URL</deveoperConne
+</scm>
+```
+
+* release:rollback -> Rollback to previous release
+* release:perform -> Performs a release from SCM by downloading tagged version from SCM
+* release:prepare-with-pom -> Prepares from previous Build
+
+### Maven Deploy
+* In progress
+
 ### Building JARs
 * In progress
 
