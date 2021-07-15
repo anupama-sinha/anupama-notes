@@ -133,3 +133,13 @@ spec:
    port: 80
    targetPort: 8080
 ```
+
+## Logging to AKS Cluster
+* az login (Then login with email ID)
+* az aks get-credentials --resource-group <<resource-grp-name>> --name <<AKS Cluster Name>> (This updates the kube-config in local for the respective AKS)
+* az acr login -n <<ACR-Name>>
+ 
+## Building Docker Image & Pushing in ACR
+* docker build -t spring-app:0.7 .
+* docker tag spring-app:0.7 acr-name-url/spring-app:0.7
+* docker push acr-name0url/spring-app:0.7
