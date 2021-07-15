@@ -36,8 +36,10 @@
  
 ## CD Build for Profiled Deployment
 * Step starts as soon as Docker Image published to Pipeline. It picks Docker Image and publishes to AKS
-* Create artifact in Pipeline Release job : Provide project name, source build pipeline for latest version
-* Create stage for Environment Deployment
+* Create artifact in Pipeline Release job : Provide project name, source build pipeline for latest version. Enable the Continuous Deployment trigger
+* Create stage for Environment Deployment with Enabled Artifact Filters pointing to CICD Job. Deployment tasks as below
+1. Replace Token(For build.buildid in deployment.yaml as Azure publishes common tag) : Mention Root Directory of CICD Job, Target as yaml files
+2. Kubectl(For kubectl apply -f configmap.yaml/secrets.yaml/deployment.yaml : Separate 3 tasks) : Mention Service Connection(Azure Resource Manager for linking dev & portal), Resource groups, AKS & Command as apply
 * Then it is saved & queued
 * Once job run succeeds, Docker Image is deployed in AKS
 
@@ -48,3 +50,86 @@
 * MAven : Building JAR using goal package
 * CLI to Publish JAR(ran in backfround to avoid locks) to Artifact Feed using below command and Personal Access Token(Generated for Azure)
 > mvn -B release:clean release:prepare release:perform -DreleaseVersion=1.0 -DdevelopmentVersion=1.0.1-SNAPSHOT -Dusername=<MY-USERNAME> -Dpassword=<MY-PAT>
+
+## Dockerfile
+
+```text
+FROM openjdk:8-jdk-alpine
+COPY target/spring-project.jar spring-project.jar
+EXPOSE 8085
+ENTRYPOINT ["java","-jar","spring-project.jar"]
+```
+ 
+## ConfigMaps
+
+```yaml
+kind: ConfigmMap
+apiVersion: v1
+metadata:
+ name: project-configmap-name
+data:
+ spring.profiles.active: dev
+```
+ 
+## Secrets
+* Secrets values can be seen as below
+> kubectl edit secrets project-secret-name
+```yaml
+kind: Secret
+apiVersion: v1
+type: Opaque
+metadata:
+ name: project-secret-name
+data:
+ DB_PASSWORD: base64-encoded-password
+```
+ 
+## Deployments
+```yaml
+apiVerersion: apps/v1
+kind: Deployment
+metadata:
+ labels:
+  app: spring-project-name
+ name: spring-project-name
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app:spring-project-name
+ template:
+  metadata:
+   labels:
+     app: spring-project-name
+  spec:
+     continaers:
+     - image: acr-url/spring-project-name:#{Build.BuildId}#
+       name: spring-project-name
+       imagePullPolicy : Always
+       ports:
+         -containerPort: 8085
+       envFrom:
+         - configMapRef:
+             name: spring-project-name
+       env:
+         -name : db.pwd
+          valueFrom:
+            secretKeyRef:
+              name: project-secret-name
+              key: DB_PWD
+ ---
+ apiVersion: v1
+ kind: Service
+ metadata:
+   name: spring-project-name
+   annotations:
+     service.beta.kubernetes.io/azure-load-balancer-resource-group: resource-group-name
+ spec:
+  type: LoadBalancer
+  selector:
+   app: spring-project-name
+ ports:
+  -protocol: TCP
+   port: 80
+   targetPort: 8080
+```
