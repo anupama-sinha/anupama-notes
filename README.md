@@ -43,6 +43,9 @@
 ### Excel Processing External JARs
 * [Fillo Sample Project](https://github.com/anupama-sinha/spring-excel-fillo-project)
 
+### [GIT](https://github.com/anupama-sinha/anupama-notes/blob/master/git.md)
+* [Gitlab](https://github.com/anupama-sinha/anupama-notes/blob/master/gitlab_inital_configuration.md)
+
 ## Database
 
 ### RDBMS
@@ -50,9 +53,6 @@
 
 ### NoSQL
 * [MongoDB](https://github.com/anupama-sinha/anupama-notes/blob/master/database/nosql/MongoDb.md)
-
-### [GIT](https://github.com/anupama-sinha/anupama-notes/blob/master/git.md)
-* [Gitlab](https://github.com/anupama-sinha/anupama-notes/blob/master/gitlab_inital_configuration.md)
 
 ## Frontend Topics
 
